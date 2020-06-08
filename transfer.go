@@ -25,7 +25,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	privateKey, err := crypto.HexToECDSA("5cc1a2676080fe6a3ae0b107967fdcae3f3c671d89d0241828e2a137effacd81")
+	privateKey, err := crypto.HexToECDSA("5cc1a2676080fe6a3ae0b107967fdcae3f3c671d89d0241828e2a137effacd81") //地址 0x2074d05c2d8C52a892E5A1dF0685378b89Ccc420 的私钥
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -60,9 +60,9 @@ func main() {
 	}
 
 	destAddress := common.HexToAddress("0x9Af40dce2Ebc76F42Ea74e2cAe460181eFb27167")
-	val := big.NewInt(1000000000000000000)
+	val := big.NewInt(1000000000000000000) // in wei
 	data := []byte("liyaojian")
-	//tx, err := instance.SetItem(auth, key, value)
+
 	tx, err := instance.SubmitTransaction(auth,destAddress,val,data)
 	if err != nil {
 		log.Fatal(err)
