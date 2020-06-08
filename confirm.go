@@ -59,7 +59,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	tx, err := instance.ConfirmTransaction(auth,big.NewInt(8))
+	tx, err := instance.ConfirmTransaction(auth,big.NewInt(9))
 	if err != nil {
 		log.Fatal(err)
 	}
