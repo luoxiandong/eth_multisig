@@ -18,9 +18,9 @@ import (
  */
 
 func main() {
-	txHex := "0xb109009c4c85e2c0d1e5d7e644ec344275450b85079a132e466bec05d71f6398" // 交易的HashID
+	txHex := "0x932b6a9b44853c917906ad71877cfe09199056931794f4f4649587057d5b7f1e" // 交易的HashID
 	priKey := "B1DA1D9167CDEB85B9FA486A197C67BA78431E9B6A90F2D3CD4A53B46831DD71"  // 确认方私钥
-	toAddress := "0x956B3669D8914BFcaf6815f67CbC3299C27c58b8"                     // 交易对象地址
+	contractAddress := "0x956B3669D8914BFcaf6815f67CbC3299C27c58b8"               // 合约地址
 
 	client, err := ethclient.Dial("https://ropsten.infura.io/v3/5329b08a37c048d3a3370ca8d53ed609")
 	if err != nil {
@@ -55,7 +55,7 @@ func main() {
 	auth.GasLimit = uint64(300000) // in units
 	auth.GasPrice = gasPrice
 
-	address := common.HexToAddress(toAddress)
+	address := common.HexToAddress(contractAddress)
 	instance, err := Contracts.NewContracts(address, client)
 	if err != nil {
 		log.Fatal(err)

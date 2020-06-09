@@ -12,7 +12,6 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
-
 )
 
 /**
@@ -20,12 +19,18 @@ import (
  */
 
 func main() {
+	priKey := "5cc1a2676080fe6a3ae0b107967fdcae3f3c671d89d0241828e2a137effacd81"     // 发起方私钥 地址0x2074d05c2d8C52a892E5A1dF0685378b89Ccc420 的私钥
+	contractAddress := "0x956B3669D8914BFcaf6815f67CbC3299C27c58b8"                  // 合约地址
+	destAddress := common.HexToAddress("0x9Af40dce2Ebc76F42Ea74e2cAe460181eFb27167") // 转账对象地址
+	val := big.NewInt(1000000000000000000)                                           // 交易数额 in wei
+	data := []byte("hello world")                                                    // 备注参数
+
 	client, err := ethclient.Dial("https://ropsten.infura.io/v3/5329b08a37c048d3a3370ca8d53ed609")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	privateKey, err := crypto.HexToECDSA("5cc1a2676080fe6a3ae0b107967fdcae3f3c671d89d0241828e2a137effacd81") //地址 0x2074d05c2d8C52a892E5A1dF0685378b89Ccc420 的私钥
+	privateKey, err := crypto.HexToECDSA(priKey) //
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -53,17 +58,13 @@ func main() {
 	auth.GasLimit = uint64(300000) // in units
 	auth.GasPrice = gasPrice
 
-	address := common.HexToAddress("0x956B3669D8914BFcaf6815f67CbC3299C27c58b8")
+	address := common.HexToAddress(contractAddress)
 	instance, err := Contracts.NewContracts(address, client)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	destAddress := common.HexToAddress("0x9Af40dce2Ebc76F42Ea74e2cAe460181eFb27167")
-	val := big.NewInt(1000000000000000000) // in wei
-	data := []byte("liyaojian")
-
-	tx, err := instance.SubmitTransaction(auth,destAddress,val,data)
+	tx, err := instance.SubmitTransaction(auth, destAddress, val, data)
 	if err != nil {
 		log.Fatal(err)
 	}
