@@ -5,27 +5,29 @@ import (
 	"crypto/ecdsa"
 	Contracts "eth_multisig/contracts"
 	"fmt"
-	"github.com/ethereum/go-ethereum/crypto"
-	"log"
-	"math/big"
-
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
-
+	"log"
+	"math/big"
 )
 
 /**
- * 写入智能合约
+ * 写入智能合约-确认交易
  */
 
 func main() {
+	txHex := "0xb109009c4c85e2c0d1e5d7e644ec344275450b85079a132e466bec05d71f6398" // 交易的HashID
+	priKey := "B1DA1D9167CDEB85B9FA486A197C67BA78431E9B6A90F2D3CD4A53B46831DD71"  // 确认方私钥
+	toAddress := "0x956B3669D8914BFcaf6815f67CbC3299C27c58b8"                     // 交易对象地址
+
 	client, err := ethclient.Dial("https://ropsten.infura.io/v3/5329b08a37c048d3a3370ca8d53ed609")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	privateKey, err := crypto.HexToECDSA("B1DA1D9167CDEB85B9FA486A197C67BA78431E9B6A90F2D3CD4A53B46831DD71") // 地址 0xaEAc2c548Eb63F8415308B3c153A58bE6d25278B 的私钥
+	privateKey, err := crypto.HexToECDSA(priKey) // 地址 0xaEAc2c548Eb63F8415308B3c153A58bE6d25278B 的私钥
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -53,13 +55,21 @@ func main() {
 	auth.GasLimit = uint64(300000) // in units
 	auth.GasPrice = gasPrice
 
-	address := common.HexToAddress("0x956B3669D8914BFcaf6815f67CbC3299C27c58b8")
+	address := common.HexToAddress(toAddress)
 	instance, err := Contracts.NewContracts(address, client)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	tx, err := instance.ConfirmTransaction(auth,big.NewInt(9))
+	receipt, err := client.TransactionReceipt(context.Background(), common.HexToHash(txHex))
+	if err != nil {
+		log.Fatal(err)
+	}
+	transactionId := receipt.Logs[0].Topics[1].Big()
+
+	fmt.Println("transactionId: ", transactionId)
+
+	tx, err := instance.ConfirmTransaction(auth, transactionId)
 	if err != nil {
 		log.Fatal(err)
 	}
