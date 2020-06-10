@@ -13,7 +13,7 @@
 
 3.  transfer.go 发起主币转账交易
 
-4.  transfer_contract.go 发起合约币转账交易
+4.  transfer_token.go 发起合约币转账交易
 
 5.  confirm.go (其他人)确认转账交易，达到required自动转出
 
