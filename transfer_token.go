@@ -19,11 +19,11 @@ import (
  */
 
 func main() {
-	priKey := "5cc1a2676080fe6a3ae0b107967fdcae3f3c671d89d0241828e2a137effacd81"      // 发起方私钥 地址0x2074d05c2d8C52a892E5A1dF0685378b89Ccc420 的私钥
-	contractAddress := "0x956B3669D8914BFcaf6815f67CbC3299C27c58b8"                   // 多签合约地址
-	destAddress := common.HexToAddress("0x9Af40dce2Ebc76F42Ea74e2cAe460181eFb27167")  // 转账对象地址
-	tokenAddress := common.HexToAddress("0x3C7E3Ffad7CB26fC9E51F49D277aCFE09Ae73eA2") // 代币合约地址
-	amount := big.NewInt(4000)                                                        // 交易数额
+	priKey := "5cc1a2676080fe6a3ae0b107967fdcae3f3c671d89d0241828e2a137effacd81"         // 发起方私钥 地址0x2074d05c2d8C52a892E5A1dF0685378b89Ccc420 的私钥
+	contractAddress := common.HexToAddress("0x956B3669D8914BFcaf6815f67CbC3299C27c58b8") // 多签合约地址
+	tokenAddress := common.HexToAddress("0x3C7E3Ffad7CB26fC9E51F49D277aCFE09Ae73eA2")    // 代币合约地址
+	destAddress := common.HexToAddress("0x9Af40dce2Ebc76F42Ea74e2cAe460181eFb27167")     // 转账对象地址
+	amount := big.NewInt(4000)                                                           // 代币交易数额
 
 	client, err := ethclient.Dial("https://ropsten.infura.io/v3/5329b08a37c048d3a3370ca8d53ed609")
 	if err != nil {
@@ -58,8 +58,7 @@ func main() {
 	auth.GasLimit = uint64(300000) // in units
 	auth.GasPrice = gasPrice
 
-	address := common.HexToAddress(contractAddress)
-	instance, err := Contracts.NewContracts(address, client)
+	instance, err := Contracts.NewContracts(contractAddress, client)
 	if err != nil {
 		log.Fatal(err)
 	}

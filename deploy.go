@@ -18,12 +18,18 @@ import (
  * 部署智能合约
  */
 func main() {
+	priKey := "5cc1a2676080fe6a3ae0b107967fdcae3f3c671d89d0241828e2a137effacd81"          // 部署合约方的私钥  0x2074d05c2d8C52a892E5A1dF0685378b89Ccc420 的私钥
+	requiredAddress1 := common.HexToAddress("0x2074d05c2d8C52a892E5A1dF0685378b89Ccc420") // 地址1
+	requiredAddress2 := common.HexToAddress("0xaEAc2c548Eb63F8415308B3c153A58bE6d25278B") // 地址2
+	requiredAddress3 := common.HexToAddress("0x44A791a7C6F6F5d249539C7bBe5D0e378a49CfA3") // 地址3
+	required := big.NewInt(2)                                                             // 所需确认数
+
 	client, err := ethclient.Dial("https://ropsten.infura.io/v3/5329b08a37c048d3a3370ca8d53ed609")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	privateKey, err := crypto.HexToECDSA("5cc1a2676080fe6a3ae0b107967fdcae3f3c671d89d0241828e2a137effacd81")// 0x2074d05c2d8C52a892E5A1dF0685378b89Ccc420 的私钥
+	privateKey, err := crypto.HexToECDSA(priKey)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -47,17 +53,17 @@ func main() {
 
 	auth := bind.NewKeyedTransactor(privateKey)
 	auth.Nonce = big.NewInt(int64(nonce))
-	auth.Value = big.NewInt(0)     // in wei
+	auth.Value = big.NewInt(0)      // in wei
 	auth.GasLimit = uint64(3000000) // in units
 	auth.GasPrice = gasPrice
 
 	owners := []common.Address{
-		common.HexToAddress("0x2074d05c2d8C52a892E5A1dF0685378b89Ccc420"),
-		common.HexToAddress("0xaEAc2c548Eb63F8415308B3c153A58bE6d25278B"),
-		common.HexToAddress("0x44A791a7C6F6F5d249539C7bBe5D0e378a49CfA3"),
+		requiredAddress1,
+		requiredAddress2,
+		requiredAddress3,
 	}
-	required := big.NewInt(2)
-	address, tx, instance, err := Contracts.DeployContracts(auth, client, owners,required)
+
+	address, tx, instance, err := Contracts.DeployContracts(auth, client, owners, required)
 	if err != nil {
 		log.Fatal(err)
 	}
