@@ -18,7 +18,7 @@ import (
  */
 
 func main() {
-	txHex := "0x932b6a9b44853c917906ad71877cfe09199056931794f4f4649587057d5b7f1e" // 交易的HashID
+	txHex := "0x3bddc671b15533f96b16586aa6d39f7db581c86f937e7ad2e0a8c15567fd647d" // 交易的HashID
 	priKey := "B1DA1D9167CDEB85B9FA486A197C67BA78431E9B6A90F2D3CD4A53B46831DD71"  // 确认方私钥
 	contractAddress := "0x956B3669D8914BFcaf6815f67CbC3299C27c58b8"               // 合约地址
 
