@@ -22,7 +22,7 @@ func main() {
 	priKey := "5cc1a2676080fe6a3ae0b107967fdcae3f3c671d89d0241828e2a137effacd81"         // 发起方私钥 地址0x2074d05c2d8C52a892E5A1dF0685378b89Ccc420 的私钥
 	contractAddress := common.HexToAddress("0x956B3669D8914BFcaf6815f67CbC3299C27c58b8") // 多签合约地址
 	destAddress := common.HexToAddress("0x9Af40dce2Ebc76F42Ea74e2cAe460181eFb27167")     // 转账对象地址
-	amount := big.NewInt(1000000000000000000)                                            // 交易数额 in wei
+	amount := big.NewInt(500000000000000000)                                             // 交易数额 in wei
 
 	client, err := ethclient.Dial("https://ropsten.infura.io/v3/5329b08a37c048d3a3370ca8d53ed609")
 	if err != nil {

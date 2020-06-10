@@ -18,7 +18,7 @@ import (
  */
 
 func main() {
-	txHash := common.HexToHash("0x3bddc671b15533f96b16586aa6d39f7db581c86f937e7ad2e0a8c15567fd647d") // transfer交易返回的HashID
+	txHash := common.HexToHash("0x6672c1b8cdcbcfd6efdca138e6e4c9e3af3f4ee2e77a4df744a7cb4b615c606e") // transfer交易返回的HashID
 	priKey := "B1DA1D9167CDEB85B9FA486A197C67BA78431E9B6A90F2D3CD4A53B46831DD71"                     // 确认方私钥  0xaEAc2c548Eb63F8415308B3c153A58bE6d25278B 的私钥
 	contractAddress := common.HexToAddress("0x956B3669D8914BFcaf6815f67CbC3299C27c58b8")             // 多签约地址
 
