@@ -9,7 +9,10 @@
     - pkg=Contracts    :指定输出文件的包名
     - out=multisig.go  :指定输出合约交互文件名称
 
-### 2.  deploy.go  部署多签合约
+### 2.  deploy.go  
+
+部署多签合约
+
     - 输入
         1. N个地址
         2. 确认数M
@@ -18,7 +21,10 @@
         1. 交易Hash
         2. 多签合约地址    
 
-### 3.  transfer.go 发起主币转账交易
+### 3.  transfer.go 
+
+发起主币转账交易
+
     - 输入
         1. 发起方私钥
         2. 多签合约地址
@@ -27,7 +33,10 @@
     - 输出
         1. 交易Hash  
     
-### 4.  transfer_token.go 发起合约币转账交易
+### 4.  transfer_token.go 
+
+发起合约币转账交易
+
     - 输入
         1. 发起方私钥
         2. 多签合约地址
@@ -37,7 +46,10 @@
     - 输出
         1. 交易Hash  
 
-### 5.  confirm.go (其他人)确认转账交易，达到required自动转出
+### 5.  confirm.go 
+
+确认转账交易，达到required自动转出
+
     - 输入
         1. 待确认的交易Hash
         2. 确认方私钥
